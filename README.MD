@@ -42,10 +42,11 @@ But I don't write this article to advertise a product, I write this because I wa
  * Logic power supply: 5V (12V help supply) for Microcontroller
    * isolated via 400V transformer, 1.5VA
    * 78L05 for 5V
- * Flow rate sensor (S511A 650, unidentified) detects water flow and rate
+ * Flow rate sensor (S511A 650, unidentified) suspected to detect water flow and rate
  * temperature sensor for outflowing water
  * 24 Ohms heating element in series with 85 degrees over temperature switch (resettable)
- * Heating element controlled via optotriac isolated switches (2 - triacs/thyristors? I did not check)
+ * Heating element controlled via optotriac isolated switches (MOC3083 + Q8040K5 - one each for L1/L2 - so doing multicycle control)
+   * both are independently driven by MCU, one might be controlled by water flow rate sensor as well
  * Ports:
    * TRX
    * ICP
