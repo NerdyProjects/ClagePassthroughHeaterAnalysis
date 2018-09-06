@@ -42,6 +42,7 @@ But I don't write this article to advertise a product, I write this because I wa
  * Logic power supply: 5V (12V help supply) for Microcontroller
    * isolated via 400V transformer, 1.5VA
    * 78L05 for 5V
+ * Microchip PIC18F25K22 MCU
  * Flow rate sensor (S511A 650, unidentified) suspected to detect water flow and rate
  * temperature sensor for outflowing water
  * 24 Ohms heating element in series with 85 degrees over temperature switch (resettable)
