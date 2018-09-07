@@ -43,8 +43,8 @@ But I don't write this article to advertise a product, I write this because I wa
    * isolated via 400V transformer, 1.5VA
    * 78L05 for 5V
  * Microchip PIC18F25K22 MCU
- * Flow rate sensor (S511A 650, unidentified) suspected to detect water flow and rate
- * temperature sensor for outflowing water
+ * Flow rate sensor (S511A 650, Honeywell SS511AT bipolar hall sensor) suspected to detect water flow and rate; powered via GPIO
+ * temperature sensor for outflowing water (some kilo Ohms, so likely NTC/thermistor, did not investigate)
  * 24 Ohms heating element in series with 85 degrees over temperature switch (resettable)
  * Heating element controlled via optotriac isolated switches (MOC3083 + Q8040K5 - one each for L1/L2 - so doing multicycle control)
    * both are independently driven by MCU, one might be controlled by water flow rate sensor as well
