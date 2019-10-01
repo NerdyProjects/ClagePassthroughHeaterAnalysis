@@ -81,4 +81,61 @@ Each register read first writes the register number and then reads 3 bytes, the 
   * Register 8: Written as 1, 16, 124 on boot
   * Register 9: Written as 1, 0, 74 on boot
 
+#### "CRC":
+ * 0x9A: 10011010
+ * 0x7C: 01111100
+ * 0x4A: 01001010
+ * 0x50: 01010000
+ * 0xB9: 10111001
+ * 0x6F: 01101111
+
+### Investigations 2019-10-01 second passthrough heater
+* I2C speed 20 kHz, control panel is master
+* Data transfer: Register architecture.
+* Read:
+  ** W <regnr>
+  ** R reads <regnr> <data byte 0> [... <date byte n>] <checksum>
+* Write:
+  ** W <regnr> <data bytes> <checksum>
+* Checksum: <CRC-8/MAXIM of payload including regnr, Polynom 0x31>
+##### Device init (on low temperature)
+
+* W 36, NACK every 10 ms, until not NACK anymore
+* W 36 01, R 01 01 9A
+* W 36 01 01 9A
+* W 36 08 01 10 7C
+* W 36 09 01 00 4A
+* W 36 02, R 02 23 50
+* W 36 05, R 05 40 B9
+* W 36 02, R 02 23 50
+* W 36 05, R 05 00 FF
+
+##### Transition low -> med
+* W 36 02, R 36 02 23 50
+[...]
+* W 36 02 26 6F
+* W 36 05 40 B9
+* W 36 02 26 6F
+
+
+I2C address 36
+(Standby)
+Every 100ms W 05, R 05 00 FF
+On temperature change to low:
+W 02 2D 4F
+W 05
+R 05 40 B9
+W 02
+R 02 2D 4F
+
+On temperature change to med(high?):
+W 02
+R 02 2D 4F
+
+On temperature change to high:
+W 02 23 50
+W 05
+R 05 40 B9
+W 02
+R 02 23 50
 
